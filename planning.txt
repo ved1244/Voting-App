@@ -1,0 +1,40 @@
+voting application
+An functionality where users can vote the given canditates.
+
+models
+routes
+
+voting app functionality
+
+1. user sign in / sign up
+2. see list of candidates
+3. a user can vote only once
+4. display live vote count for each candidate
+5. user must have a unique government ID : Voting Card
+6. There should be an admin to add candidates but the admin cannot vote
+7. user can change their password
+8. user can login with their voting card number
+
+-----------------------------------------------------------------------------------
+
+routes
+
+user authentication:
+  /signup: POST - create a new user
+  /login: POST - user login with voting card number
+
+voting:
+  /candidates: GET - list all candidates
+  /vote/: candidateId: POST - vote for a candidate
+
+vote counts:
+  /vote/counts: GET - get live vote count for each candidate
+
+user profile:
+  /profile: GET - get user profile information
+  /profile/password: PUT - change user password
+
+admin canditate management:
+  /candidates: POST - add a new candidate
+  /candidates/:candidateId: PUT - update candidate information
+  /candidates/:candidateId: DELETE - remove a candidate
