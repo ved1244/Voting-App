@@ -10,10 +10,10 @@ voting app functionality
 2. see list of candidates
 3. a user can vote only once
 4. display live vote count for each candidate
-5. user must have a unique government ID : Voting Card
+5. user must have a unique government ID :  aadhaarCard
 6. There should be an admin to add candidates but the admin cannot vote
 7. user can change their password
-8. user can login with their voting card number
+8. user can login with their aadhaar card number
 
 -----------------------------------------------------------------------------------
 

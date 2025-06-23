@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-//const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 // Define the user schema
 const candidateSchema = new mongoose.Schema({
@@ -34,5 +34,5 @@ const candidateSchema = new mongoose.Schema({
   },
 });
 
-const Candidate = mongoose.model("Candidate", CandidateSchema);
+const Candidate = mongoose.model("Candidate", candidateSchema);
 module.exports = Candidate;

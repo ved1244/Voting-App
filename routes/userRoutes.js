@@ -3,24 +3,24 @@ const router = express.Router();
 const User = require('./../models/user');
 const {jwtAuthMiddleware, generateToken} = require('./../jwt');
 
-// POST route to add a person
+
+//POST route to add a User
 router.post('/signup', async (req, res) =>{
     try{
         const data = req.body // Assuming the request body contains the User data
 
-        // Create a new User document using the Mongoose model
+  // Create a new User document using the Mongoose model
         const newUser = new User(data);
 
-        // Save the new User to the database
+        // Save the new user to the database
         const response = await newUser.save();
         console.log('data saved');
 
         const payload = {
-            id: response.id,
+            id: response.id
         }
         console.log(JSON.stringify(payload));
         const token = generateToken(payload);
-        console.log("Token is : ", token);
 
         res.status(200).json({response: response, token: token});
     }
@@ -33,11 +33,11 @@ router.post('/signup', async (req, res) =>{
 // Login Route
 router.post('/login', async(req, res) => {
     try{
-        // Extract votingCard and password from request body
-        const {votingCard, password} = req.body;
+        // Extract aadhaarcardNumber and password from request body
+        const {aadhaarcardnumber, password} = req.body;
 
-        // Find the user by votingCard
-        const user = await User.findOne({votingCard: votingCard});
+        // Find the user by aadhaarcardNumber
+        const user = await User.findOne({aadhaarcardnumber: aadhaarcardnumber});
 
         // If user does not exist or password does not match, return error
         if( !user || !(await user.comparePassword(password))){
@@ -63,7 +63,7 @@ router.get('/profile', jwtAuthMiddleware, async (req, res) => {
     try{
         const userData = req.user;
         const userId = userData.id;
-        const user = await Person.findById(userId);
+        const user = await user.findById(userId);
 
         res.status(200).json({user});
     }catch(err){
@@ -96,6 +96,20 @@ router.put('/profile/password', async (req, res)=>{
         res.status(500).json({error: 'Internal Server Error'});
     }
 })
+
+router.get('/find-duplicate', async (req, res) => {
+  try {
+    const email = "duplicate-email@example.com";
+    const duplicateUser = await User.findOne({ email });
+    if (duplicateUser) {
+      return res.json(duplicateUser);
+    }
+    return res.status(404).json({ message: 'No duplicate user found' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 
 
 module.exports = router;
