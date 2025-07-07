@@ -26,3 +26,5 @@ A secure and role-based online voting application built with Node.js, Express, M
 ├── .env # Environment variables (JWT, DB URI)
 └── README.md
 
+Deployment path
+https://api-voting-app.onrender.com
